@@ -14,53 +14,45 @@ class TSP:
     def __init__(self):
         self.vertices = []
         self.edges = []
+
     def addEdge(self, edge):
         self.edges.append(edge)
+
     def addVertex(self, vertex):
         self.vertices.append(vertex)
 
+    # for finding how many vertices are needed
+    # in the tsp, and they are added to the TSP
+    def initializeVertices(self, filename):
+        with open(filename) as f:
+            first_line = f.readline()
+            arr = first_line.split(" ")
+            i = 0;
+            while i < len(arr):
+                self.addVertex(Vertex(i))
+                i+=1
+
+    # go through all the edges and add them to the TSP
+    # are their respective vertices
+    def addEdges(self, filename):
+        with open(filename) as f:
+            for num, line in enumerate(f, 1):
+                numbers = line.split(" ");
+                i = 0;
+                for x in numbers:
+                    weight = int(float(x))
+                    if weight is not 0:
+                        v1 = self.vertices[num-1]
+                        v2 = self.vertices[i]
+                        edge = Edge(v1, v2, weight)
+                        self.addEdge(edge)
+                        v1.addEdge(edge)
+                    i += 1
+
 tsp = TSP()
+tsp.initializeVertices(filename)
+tsp.addEdges(filename)
 
-# v1 = Vertex()
-# v2 = Vertex()
-# edge = Edge(v1, v2, 23)
-# tsp.addVertex(v1)
-# tsp.addVertex(v2)
-# v1.addEdge(edge)
-# v2.addEdge(edge)
-# tsp.addEdge(edge)
-
-# for finding how many vertices are needed
-# in the tsp, and they are added to the TSP
-with open(filename) as f:
-    first_line = f.readline()
-    arr = first_line.split(" ")
-    i = 0;
-    while i < len(arr):
-        tsp.addVertex(Vertex(i))
-        i+=1
-
-# go through all the edges and add them to the TSP
-# are their respective vertices
-with open(filename) as f:
-    for num, line in enumerate(f, 1):
-        numbers = line.split(" ");
-        i = 0;
-        for x in numbers:
-            weight = int(float(x))
-            if weight is not 0:
-                v1 = tsp.vertices[num-1]
-                v2 = tsp.vertices[i]
-                edge = Edge(v1, v2, weight)
-                tsp.addEdge(edge)
-                v1.addEdge(edge)
-                # v2.addEdge(edge)
-                # print(str(num-1) + "," + str(i), end=" ")
-            # print(numbers[x], end=" ")
-            i += 1
-        # print("")
-# for e in tsp.edges:
-#     print(e)
-# print(len(tsp.edges))
+print(len(tsp.edges))
 for v in tsp.vertices:
     print(v.toString())
