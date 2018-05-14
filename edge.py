@@ -6,3 +6,6 @@ class Edge:
 
     def getWeight(self):
         return self.weight
+
+    def toString(self):
+        return str(self.weight)
