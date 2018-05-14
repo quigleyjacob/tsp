@@ -8,4 +8,4 @@ class Edge:
         return self.weight
 
     def toString(self):
-        return str(self.weight)
+        return "(Vertices: " + str(self.v1.id) + "," + str(self.v2.id) + " Weight: " + str(self.weight) + ")"

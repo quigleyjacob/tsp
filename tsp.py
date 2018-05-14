@@ -1,29 +1,12 @@
-import re, sys, os
 from edge import Edge
 from vertex import Vertex
 
-if len(sys.argv) < 2:
-    sys.exit(f"You didn't include a filename. Use the format 'python3 tsp.py <filename>'")
-
-filename = sys.argv[1]
-
-if not os.path.exists(filename):
-    sys.exit(f"Error: File '{sys.argv[1]}' not found")
-
 class TSP:
-    def __init__(self):
+    def __init__(self, filename):
         self.vertices = []
         self.edges = []
-
-    def addEdge(self, edge):
-        self.edges.append(edge)
-
-    def addVertex(self, vertex):
-        self.vertices.append(vertex)
-
-    # for finding how many vertices are needed
-    # in the tsp, and they are added to the TSP
-    def initializeVertices(self, filename):
+        # for finding how many vertices are needed
+        # in the tsp, and they are added to the TSP
         with open(filename) as f:
             first_line = f.readline()
             arr = first_line.split(" ")
@@ -32,9 +15,8 @@ class TSP:
                 self.addVertex(Vertex(i))
                 i+=1
 
-    # go through all the edges and add them to the TSP
-    # are their respective vertices
-    def addEdges(self, filename):
+        # go through all the edges and add them to the TSP
+        # are their respective vertices
         with open(filename) as f:
             for num, line in enumerate(f, 1):
                 numbers = line.split(" ");
@@ -49,10 +31,8 @@ class TSP:
                         v1.addEdge(edge)
                     i += 1
 
-tsp = TSP()
-tsp.initializeVertices(filename)
-tsp.addEdges(filename)
+    def addEdge(self, edge):
+        self.edges.append(edge)
 
-print(len(tsp.edges))
-for v in tsp.vertices:
-    print(v.toString())
+    def addVertex(self, vertex):
+        self.vertices.append(vertex)

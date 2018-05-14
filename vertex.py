@@ -8,7 +8,10 @@ class Vertex:
         self.edges.append(edge)
 
     def toString(self):
-        list = "Id: " + str(self.id) + "    Edge Weights: " 
+        list = "Id: " + str(self.id) + "    Edges: "
         for e in self.edges:
             list += e.toString() + " "
         return list
+
+    def toShortString(self):
+        return "Id: " + str(self.id) + " "
