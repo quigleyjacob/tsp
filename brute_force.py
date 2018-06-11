@@ -2,7 +2,7 @@ import os, sys
 from tsp import TSP
 
 if len(sys.argv) < 2:
-    sys.exit(f"You didn't include a filename. Use the format 'python3 tsp.py <filename>'")
+    sys.exit(f"You didn't include a filename. Use the format 'python3 brute_force.py <filename>'")
 
 filename = sys.argv[1]
 
