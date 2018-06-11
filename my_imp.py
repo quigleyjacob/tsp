@@ -25,6 +25,7 @@ for i in myImp.tsp.edges:
 # for i in heapSort.nodes:
 #     if i is not None:
 #         print(i.toString())
-print(heapSort.size)
-heapSort.removeMin()
-print(heapSort.size)
+
+while(heapSort.size > 0):
+    min = heapSort.removeMin()
+    print(min.toString())
