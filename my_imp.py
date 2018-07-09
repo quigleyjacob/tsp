@@ -25,8 +25,10 @@ heapSort = HeapSort()
 for i in myImp.tsp.edges:
     heapSort.addToTree(i)
 
+# for i in myImp.tsp.vertices:
+#     print(i.toString());
 
-kruskel = Kruskel(heapSort)
+kruskel = Kruskel(heapSort, myImp.tsp)
 
 kruskel.run()
 kruskel.toString()

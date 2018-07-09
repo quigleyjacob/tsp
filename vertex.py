@@ -2,14 +2,21 @@ from edge import Edge
 class Vertex:
     def __init__(self, id):
         self.id = id
-        self.edges = []
+        self.edgesTo = []
+        self.edgesFrom = []
 
-    def addEdge(self, edge):
-        self.edges.append(edge)
+    def addEdgeTo(self, edge):
+        self.edgesTo.append(edge)
+
+    def addEdgeFrom(self, edge):
+        self.edgesFrom.append(edge)
 
     def toString(self):
-        list = "Id: " + str(self.id) + "    Edges: "
-        for e in self.edges:
+        list = "Id: " + str(self.id) + "    Edges To: "
+        for e in self.edgesTo:
+            list += e.toString() + " "
+        list += " Edges From: "
+        for e in self.edgesFrom:
             list += e.toString() + " "
         return list
 

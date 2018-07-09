@@ -20,8 +20,6 @@ class TSP:
         with open(filename) as f:
             for num, line in enumerate(f, 1):
                 numbers = line.split(" ");
-                while len(numbers) > 0 and numbers[0] is not "0":
-                    numbers.pop(0)
                 for i, x in enumerate(numbers, 0):
                     weight = int(float(x))
                     if weight is not 0:
@@ -29,8 +27,8 @@ class TSP:
                         v2 = self.vertices[i]
                         edge = Edge(v1, v2, weight)
                         self.addEdge(edge)
-                        v1.addEdge(edge)
-                        v2.addEdge(edge)
+                        v2.addEdgeTo(edge)
+                        v1.addEdgeFrom(edge)
 
     def addEdge(self, edge):
         self.edges.append(edge)

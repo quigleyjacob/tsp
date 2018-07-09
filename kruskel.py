@@ -3,9 +3,11 @@ from vertex import Vertex
 from heap_sort import HeapSort
 
 class Kruskel:
-    def __init__(self, heap):
+    def __init__(self, heap, tsp):
         self.heap = heap
-        self.tree = []
+        self.edgesInTree = []
+        self.verticesInTree = []
+        self.tsp = tsp
 
     def vertexInTree(self, v):
         for e in self.tree:
@@ -13,19 +15,26 @@ class Kruskel:
                 return True
         return False
 
+    def verticesAreConnected(self, v1, v2):
+        if(len(self.verticesInTree) == 0):
+            return True
+        return not all(x in self.verticesInTree for x in [v1, v2])
+
     def run(self):
         while self.heap.size > 0:
             min = self.heap.removeMin()
-        # print(min.toString())
-        # print(min.v1.__eq__(min.v2))
-            if not self.vertexInTree(min.v1) or not self.vertexInTree(min.v2):
-            # if self.vertexInTree(min.v1) is not self.vertexInTree(min.v2):
-                self.tree.append(min)
-            # print(not self.vertexInTree(min.v1) or not self.vertexInTree(min.v2))
-        # print(self.vertexInTree(min.v1))
-        # print(min.v2.toString())
-        return self.tree
+            if self.verticesAreConnected(min.v1, min.v2):
+                self.edgesInTree.append(min)
+                v1 = Vertex(min.v1.id)
+                v2 = Vertex(min.v2.id)
+                v1.addEdgeTo(min)
+                v2.addEdgeTo(min)
+                self.verticesInTree.append(v1)
+                self.verticesInTree.append(v2)
+        return self.edgesInTree
 
     def toString(self):
-        for e in self.tree:
+        for v in self.verticesInTree:
+            print(v.toString())
+        for e in self.edgesInTree:
             print(e.toString())

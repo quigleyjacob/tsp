@@ -21,11 +21,11 @@ class BruteForce:
 
     def pathHelper(self, path, vertices):
         last = len(path)-1;
-        if(len(path) == len(path[0].edges)+1):
+        if(len(path) == len(path[0].edgesFrom)+1):
             self.paths.append(path)
             return path
         else:
-            for e in path[last].edges:
+            for e in path[last].edgesFrom:
                 if e.v2 not in path:
                     newPath = list(path)
                     newPath.append(e.v2)
@@ -41,12 +41,12 @@ class BruteForce:
                 vertex = p[i]
                 if i == len(p)-1:
                     firstId = p[0].id
-                    for e in vertex.edges:
+                    for e in vertex.edgesFrom:
                         if e.v2.id == firstId:
                             path += e.weight
                 else:
                     nextId = p[i+1].id
-                    for e in vertex.edges:
+                    for e in vertex.edgesFrom:
                         if e.v2.id == nextId:
                             path += e.weight
                 i+=1
