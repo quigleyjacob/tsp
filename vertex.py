@@ -15,3 +15,6 @@ class Vertex:
 
     def toShortString(self):
         return "Id: " + str(self.id) + " "
+
+    def __eq__(self, v):
+        return self.id is v.id
