@@ -9,12 +9,6 @@ class Kruskel:
         self.verticesInTree = []
         self.tsp = tsp
 
-    def vertexInTree(self, v):
-        for e in self.tree:
-            if e.v1.__eq__(v) or e.v2.__eq__(v):
-                return True
-        return False
-
     def verticesAreConnected(self, v1, v2):
         if(len(self.verticesInTree) == 0):
             return True

@@ -1,7 +1,7 @@
 import os, sys
 from tsp import TSP
 from heap_sort import HeapSort
-from kruskel import Kruskel
+from msl_kruskel import MSLKruskel
 from vertex import Vertex
 
 if len(sys.argv) < 2:
@@ -28,10 +28,13 @@ for i in myImp.tsp.edges:
 # for i in myImp.tsp.vertices:
 #     print(i.toString());
 
-kruskel = Kruskel(heapSort, myImp.tsp)
+kruskel = MSLKruskel(heapSort, myImp.tsp)
 
-kruskel.run()
-kruskel.toString()
+edges = kruskel.run()
+for v in kruskel.verticesInTree:
+    print(v.toString())
+# for e in edges:
+#     print(e.toString())
 
 # for i in heapSort.nodes:
 #     if i is not None:
